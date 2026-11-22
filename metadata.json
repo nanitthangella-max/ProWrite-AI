@@ -1,0 +1,6 @@
+{
+  "name": "ProWrite AI",
+  "description": "AI-powered Professional Email & LinkedIn Message Writer for job applications, referrals, follow-ups, internships, and thank-you notes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

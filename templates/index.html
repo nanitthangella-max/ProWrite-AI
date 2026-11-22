@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProWrite AI — Professional Email &amp; LinkedIn Message Writer</title>
+    <meta
+      name="description"
+      content="Craft polished professional emails and concise LinkedIn messages under 300 characters with ProWrite AI."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Mobile Drawer Backdrop -->
+      <div id="mobile-backdrop" class="mobile-backdrop" hidden></div>
+
+      <!-- Sidebar Navigation -->
+      <aside id="sidebar" class="sidebar" aria-label="Sidebar Navigation">
+        <div class="sidebar-brand">
+          <button type="button" class="brand-btn" data-nav="home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                <line x1="16" y1="8" x2="2" y2="22"></line>
+                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+              </svg>
+            </span>
+            <span class="brand-name">ProWrite AI</span>
+          </button>
+          <button
+            type="button"
+            id="close-sidebar-btn"
+            class="icon-btn mobile-only"
+            aria-label="Close navigation menu"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <button type="button" class="nav-item active" data-nav="home">
+            <span>Home</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="email-writer">
+            <span>Email Writer</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="linkedin-writer">
+            <span>LinkedIn Message Writer</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="history">
+            <span>History</span>
+            <span id="history-count-badge" class="nav-count" hidden>0</span>
+          </button>
+          <button type="button" class="nav-item" data-nav="about">
+            <span>About</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-tip">
+            <p class="sidebar-tip-title">Outreach Standards</p>
+            <p class="sidebar-tip-body">
+              Emails generate structured Subject + Body. LinkedIn messages stay strictly under 300 characters.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Column -->
+      <div class="main-column">
+        <!-- Header -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              type="button"
+              id="open-sidebar-btn"
+              class="icon-btn mobile-only"
+              aria-label="Open navigation menu"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <span class="topbar-title">ProWrite AI</span>
+            <span class="topbar-divider" aria-hidden="true">/</span>
+            <span id="topbar-section-label" class="topbar-section">Home</span>
+          </div>
+
+          <button type="button" id="quick-compose-btn" class="btn btn-primary">
+            New Message
+          </button>
+        </header>
+
+        <main class="page-content">
+          <!-- VIEW 1: HOME -->
+          <section id="view-home" class="view-section">
+            <div class="hero-card">
+              <div class="hero-copy">
+                <p class="hero-kicker">Executive Career Outreach Workspace</p>
+                <h1 class="hero-heading">
+                  Write clear, persuasive emails and LinkedIn notes in seconds.
+                </h1>
+                <p class="hero-subtext">
+                  Select your outreach goal, name your recipient, and drop in 2–3 key points. ProWrite AI composes structured Subject + Body emails or concise LinkedIn messages strictly under 300 characters.
+                </p>
+                <div class="hero-actions">
+                  <button type="button" class="btn btn-primary" data-launch="Email">
+                    Open Email Writer
+                  </button>
+                  <button type="button" class="btn btn-secondary" data-launch="LinkedIn">
+                    Open LinkedIn Writer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-header">
+              <h2 class="section-title">Outreach Scenarios</h2>
+              <p class="section-subtitle">
+                Choose a message type to launch the writer with that goal selected.
+              </p>
+            </div>
+
+            <div class="template-grid">
+              <button type="button" class="template-card" data-template="Job Application">
+                <span class="template-index">01</span>
+                <h3>Job Application</h3>
+                <p>Direct outreach to recruiters or hiring managers highlighting measurable role fit.</p>
+              </button>
+              <button type="button" class="template-card" data-template="Referral Request">
+                <span class="template-index">02</span>
+                <h3>Referral Request</h3>
+                <p>Warm, low-friction note asking an employee or contact to refer you for an open role.</p>
+              </button>
+              <button type="button" class="template-card" data-template="Interview Follow-up">
+                <span class="template-index">03</span>
+                <h3>Interview Follow-up</h3>
+                <p>Composed check-in after an interview round to reaffirm interest and invite next steps.</p>
+              </button>
+              <button type="button" class="template-card" data-template="Internship Request">
+                <span class="template-index">04</span>
+                <h3>Internship Request</h3>
+                <p>Focused outreach from students or early-career candidates showcasing projects.</p>
+              </button>
+              <button type="button" class="template-card" data-template="Thank-you After Interview">
+                <span class="template-index">05</span>
+                <h3>Thank-you After Interview</h3>
+                <p>Thoughtful post-interview appreciation referencing a specific conversation takeaway.</p>
+              </button>
+            </div>
+          </section>
+
+          <!-- VIEW 2: WRITER (EMAIL & LINKEDIN) -->
+          <section id="view-writer" class="view-section" hidden>
+            <div class="writer-header">
+              <div>
+                <h1 id="writer-title" class="page-title">Professional Email Writer</h1>
+                <p id="writer-subtitle" class="page-subtitle">
+                  Generates a structured Subject line and Email Body tailored to your recipient.
+                </p>
+              </div>
+              <button type="button" id="fill-example-btn" class="link-btn">
+                Fill example inputs
+              </button>
+            </div>
+
+            <div class="writer-grid">
+              <!-- Input Form Card -->
+              <form id="writer-form" class="card form-card" novalidate>
+                <div class="card-header">
+                  <h2>Message Details</h2>
+                  <span class="card-meta">All fields required</span>
+                </div>
+
+                <div class="field">
+                  <label for="message-type">Message Type</label>
+                  <select id="message-type" name="messageType">
+                    <option value="Job Application">Job Application</option>
+                    <option value="Referral Request">Referral Request</option>
+                    <option value="Interview Follow-up">Interview Follow-up</option>
+                    <option value="Internship Request">Internship Request</option>
+                    <option value="Thank-you After Interview">Thank-you After Interview</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="recipient">Who is it for?</label>
+                  <input
+                    id="recipient"
+                    name="recipient"
+                    type="text"
+                    placeholder="e.g., Sarah Chen, Senior Engineering Manager at Stripe"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="field-label-row">
+                    <label for="key-points">Key Points</label>
+                    <span class="field-hint">2–3 points</span>
+                  </div>
+                  <textarea
+                    id="key-points"
+                    name="keyPoints"
+                    rows="4"
+                    placeholder="Enter 2–3 important points (e.g., 4+ years React & Python; reduced checkout latency by 38%; excited about your developer platform)"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="field">
+                  <span class="field-label">Platform Selection</span>
+                  <div class="segmented-control" role="radiogroup" aria-label="Platform Selection">
+                    <button
+                      type="button"
+                      class="segment-btn active"
+                      data-platform="Email"
+                      aria-checked="true"
+                      role="radio"
+                    >
+                      Email
+                    </button>
+                    <button
+                      type="button"
+                      class="segment-btn"
+                      data-platform="LinkedIn"
+                      aria-checked="false"
+                      role="radio"
+                    >
+                      LinkedIn
+                    </button>
+                  </div>
+                  <p id="platform-helper" class="helper-text">
+                    Emails generate a separate Subject line and formatted Body.
+                  </p>
+                </div>
+
+                <div id="validation-alert" class="alert alert-warning" role="alert" hidden></div>
+
+                <button type="submit" id="generate-btn" class="btn btn-primary btn-block">
+                  Generate Message
+                </button>
+              </form>
+
+              <!-- Output Card -->
+              <section class="card output-card" aria-label="Generated Message Output">
+                <div class="card-header output-header">
+                  <div>
+                    <h2>Generated Output</h2>
+                    <p id="output-meta" class="card-meta">Ready for Email output</p>
+                  </div>
+                  <div class="output-actions">
+                    <button type="button" id="copy-btn" class="btn btn-outline-sm" disabled>
+                      Copy
+                    </button>
+                    <button type="button" id="regenerate-btn" class="btn btn-outline-sm" disabled>
+                      Regenerate
+                    </button>
+                    <button type="button" id="clear-btn" class="btn btn-outline-sm" disabled>
+                      Clear
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="output-empty" class="output-empty">
+                  <h3>Your generated message will appear here</h3>
+                  <p>
+                    Fill in who the message is for and 2–3 key points on the left, then click Generate Message.
+                  </p>
+                </div>
+
+                <!-- Loading Animation -->
+                <div id="output-loading" class="output-loading" hidden aria-live="polite">
+                  <div class="loading-status">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span id="loading-text">Drafting your message...</span>
+                  </div>
+                  <div class="skeleton-line short"></div>
+                  <div class="skeleton-box"></div>
+                  <div class="skeleton-line"></div>
+                  <div class="skeleton-line"></div>
+                  <div class="skeleton-line medium"></div>
+                </div>
+
+                <!-- Error State -->
+                <div id="output-error" class="alert alert-error" role="alert" hidden>
+                  <p id="output-error-text"></p>
+                  <button type="button" id="retry-btn" class="btn btn-danger-sm">
+                    Try Again
+                  </button>
+                </div>
+
+                <!-- Email Output -->
+                <div id="email-output" class="output-content" hidden>
+                  <div class="output-block">
+                    <div class="output-block-header">
+                      <span class="output-label">Subject</span>
+                      <button type="button" id="copy-subject-btn" class="link-btn-sm">
+                        Copy subject
+                      </button>
+                    </div>
+                    <div id="email-subject" class="subject-box"></div>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="output-label">Email Body</span>
+                    <div id="email-body" class="body-box"></div>
+                  </div>
+                </div>
+
+                <!-- LinkedIn Output -->
+                <div id="linkedin-output" class="output-content" hidden>
+                  <div class="output-block-header">
+                    <span class="output-label">LinkedIn Message</span>
+                    <span id="linkedin-char-count" class="char-counter">0 / 300 chars</span>
+                  </div>
+                  <div id="linkedin-body" class="linkedin-box"></div>
+                  <div class="progress-track">
+                    <div id="linkedin-progress" class="progress-fill"></div>
+                  </div>
+                  <p class="helper-text">
+                    Strictly formatted under LinkedIn's 300-character limit.
+                  </p>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- VIEW 3: HISTORY -->
+          <section id="view-history" class="view-section" hidden>
+            <div class="writer-header">
+              <div>
+                <h1 class="page-title">Message History</h1>
+                <p class="page-subtitle">
+                  Review, copy, or reopen your previously generated messages.
+                </p>
+              </div>
+              <button type="button" id="clear-history-btn" class="btn btn-outline-sm" hidden>
+                Clear All History
+              </button>
+            </div>
+
+            <div id="history-empty" class="card empty-history">
+              <h3>No generated messages yet</h3>
+              <p>
+                Every email or LinkedIn message you generate is saved locally here for quick reuse.
+              </p>
+              <button type="button" class="btn btn-primary" data-launch="Email">
+                Create First Message
+              </button>
+            </div>
+
+            <div id="history-list" class="history-list"></div>
+          </section>
+
+          <!-- VIEW 4: ABOUT -->
+          <section id="view-about" class="view-section" hidden>
+            <h1 class="page-title">About ProWrite AI</h1>
+            <p class="page-subtitle">
+              Built with Python, Flask, and the Google Gemini API to craft clear, respectful career outreach.
+            </p>
+
+            <div class="about-grid">
+              <div class="card about-card">
+                <h3>Structured Emails</h3>
+                <p>
+                  Generates a tailored Subject line and complete Email Body with polite opening and closing lines.
+                </p>
+              </div>
+              <div class="card about-card">
+                <h3>LinkedIn Precision</h3>
+                <p>
+                  Keeps LinkedIn connection notes and messages strictly under 300 characters without losing personal context.
+                </p>
+              </div>
+              <div class="card about-card">
+                <h3>Zero Database Overhead</h3>
+                <p>
+                  Requests run statelessly through Flask and Gemini; your draft history stays private in your browser.
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
